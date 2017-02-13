@@ -1,10 +1,24 @@
-# 2048
-A small clone of [1024](https://play.google.com/store/apps/details?id=com.veewo.a1024), based on [Saming's 2048](http://saming.fr/p/2048/) (also a clone).
+# Negative 2048 (or just -2048)
+Play it [here](http://undeadpenguin.com/negative-2048)!
 
-Made just for fun. [Play it here!](http://gabrielecirulli.github.io/2048/)
+http://undeadpenguin.com/negative or http://undeadpenguin.com/- also point there if you want a bit simpler URL.
+
+Inspired partially by [@tef](http://twitter.com/tef)'s [0](http://tef.github.io/0/)
+
+- -2048 is very similar to the 2048 you know and love. However, along with 2's spawning on the board, -2's can spawn as well. 
+- Two tiles with the same or opposite values will combine. Tiles with equal values add together as one would expect. 
+- Opposite tiles combine to form a zero tile. The zero tile can combine with any tile.
+- The sign of the tile (whether it is a 2 or -2) is determined by a percentage defined at the beginning of the game. So, the percentage of positive tiles will be between 35% and 65%.
+- A 2048 or -2048 tile will "win" the game. 
+
+## Scoring
+
+- Merging of two equal tiles will reward double the positive value of the original tile (also the value of the new tile)
+- Merging of two opposite tiles will also reward double the positive value of the original tile
+- Merging of any tile and a zero tile will reward the positive value of the original tile
 
 ### Contributions
-
+ - [gabrielecirulli](https://github.com/gabrielecirulli/) created the original game
  - [TimPetricola](https://github.com/TimPetricola) added best score storage
  - [chrisprice](https://github.com/chrisprice) added custom code for swipe handling on mobile
  - [elektryk](https://github.com/elektryk) made swipes work on Windows Phone
@@ -12,21 +26,14 @@ Made just for fun. [Play it here!](http://gabrielecirulli.github.io/2048/)
 
 Many thanks to [rayhaanj](https://github.com/rayhaanj), [Mechazawa](https://github.com/Mechazawa), [grant](https://github.com/grant), [remram44](https://github.com/remram44) and [ghoullier](https://github.com/ghoullier) for the many other good contributions.
 
-### Screenshot
-
-<p align="center">
-  <img src="http://pictures.gabrielecirulli.com/2048-20140309-234100.png" alt="Screenshot"/>
-</p>
-
-That screenshot is fake, by the way. I never reached 2048 :smile:
-
-## Contributing
-Changes and improvements are more than welcome! Feel free to fork and open a pull request. Please make your changes in a specific branch and request to pull into `master`! If you can, please make sure the game fully works before sending the PR, as that will help speed up the process.
-
-You can find the same information in the [contributing guide.](https://github.com/gabrielecirulli/2048/blob/master/CONTRIBUTING.md)
-
 ## License
-2048 is licensed under the [MIT license.](https://github.com/gabrielecirulli/2048/blob/master/LICENSE.txt)
+-2048 is licensed under the [MIT license.](https://github.com/gabrielecirulli/2048/blob/master/LICENSE.txt) Please read the full licence if you want to use this code. You can legaly steal / monitize this code, but please don't be a dick.
 
 ## Donations
-I made this in my spare time, and it's hosted on GitHub (which means I don't have any hosting costs), but if you enjoyed the game and feel like buying me coffee, you can donate at my BTC address: `1Ec6onfsQmoP9kkL3zkpB6c5sA4PVcXU2i`. Thank you very much!
+I made this for fun / practice in my spare time. If you really enjoyed it and think it's worth money, please consider donating some BTC: 1CbtwY45bgbJ5WMi5RuAT7JpWPaFUw7bT1
+
+# Original 2048
+Find the original game [here](http://git.io/2048).
+A small clone of [1024](https://play.google.com/store/apps/details?id=com.veewo.a1024), based on [Saming's 2048](http://saming.fr/p/2048/) (also a clone).
+
+Made just for fun. [Play it here!](http://gabrielecirulli.github.io/2048/)

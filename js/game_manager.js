@@ -47,12 +47,14 @@ GameManager.prototype.setup = function () {
     this.over        = previousState.over;
     this.won         = previousState.won;
     this.keepPlaying = previousState.keepPlaying;
+    this.percentPositive = previousState.percentPositive;
   } else {
     this.grid        = new Grid(this.size);
     this.score       = 0;
     this.over        = false;
     this.won         = false;
     this.keepPlaying = false;
+    this.percentPositive = (0.3*Math.random()-0.15)+0.5; //Percent spawning of +2's
 
     // Add the initial tiles
     this.addStartTiles();
@@ -60,6 +62,7 @@ GameManager.prototype.setup = function () {
 
   // Update the actuator
   this.actuate();
+  console.log("Percent Positive: "+this.percentPositive);
 };
 
 // Set up the initial tiles to start the game with
@@ -72,7 +75,7 @@ GameManager.prototype.addStartTiles = function () {
 // Adds a tile in a random position
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
-    var value = Math.random() < 0.9 ? 2 : 4;
+    var value = Math.random() < this.percentPositive ? 2 : -2;
     var tile = new Tile(this.grid.randomAvailableCell(), value);
 
     this.grid.insertTile(tile);
@@ -109,7 +112,8 @@ GameManager.prototype.serialize = function () {
     score:       this.score,
     over:        this.over,
     won:         this.won,
-    keepPlaying: this.keepPlaying
+    keepPlaying: this.keepPlaying,
+    percentPositive:this.percentPositive
   };
 };
 
@@ -157,8 +161,13 @@ GameManager.prototype.move = function (direction) {
         var next      = self.grid.cellContent(positions.next);
 
         // Only one merger per row traversal?
-        if (next && next.value === tile.value && !next.mergedFrom) {
-          var merged = new Tile(positions.next, tile.value * 2);
+        if (next && (next.value === tile.value || next.value === tile.value*-1 || next.value === 0 || tile.value === 0) && !next.mergedFrom) {
+          if (next.value === tile.value) var merged = new Tile(positions.next, tile.value * 2);
+          else if (next.value === tile.value*-1) var merged = new Tile(positions.next, 0);
+          else if (next.value === 0) var merged = new Tile(positions.next, tile.value);
+          else if (tile.value === 0) var merged = new Tile(positions.next, next.value);
+          else var merged = new Tile(positions.next, 0);
+          
           merged.mergedFrom = [tile, next];
 
           self.grid.insertTile(merged);
@@ -168,10 +177,11 @@ GameManager.prototype.move = function (direction) {
           tile.updatePosition(positions.next);
 
           // Update the score
-          self.score += merged.value;
+          if (next.value === tile.value*-1) self.score += Math.abs(tile.value*2); //A cancellation gives points as if they were equal tiles 
+          else self.score += Math.abs(merged.value);
 
           // The mighty 2048 tile
-          if (merged.value === 2048) self.won = true;
+          if (Math.abs(merged.value) === 2048) self.won = true;
         } else {
           self.moveTile(tile, positions.farthest);
         }
@@ -260,7 +270,7 @@ GameManager.prototype.tileMatchesAvailable = function () {
 
           var other  = self.grid.cellContent(cell);
 
-          if (other && other.value === tile.value) {
+          if (other && (Math.abs(other.value) === Math.abs(tile.value) || other.value === 0)) {
             return true; // These two tiles can be merged
           }
         }
