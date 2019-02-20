@@ -1,7 +1,5 @@
 # Negative 2048 (or just -2048)
-Play it [here](http://undeadpenguin.com/negative-2048)!
-
-http://undeadpenguin.com/negative or http://undeadpenguin.com/- also point there if you want a bit simpler URL.
+Play it [here](https://afflitto.tech/-2048)!
 
 Inspired partially by [@tef](http://twitter.com/tef)'s [0](http://tef.github.io/0/)
 
